@@ -22,14 +22,17 @@ src
 |-- components
 |   |-- Chat
 |   |   |-- Chat.jsx
-|   |   |-- ChatArea.jsx
-|   |   |-- InputArea.jsx
+|   |-- ChatWrapper
+|   |   |-- ChatArea
+|   |   |   |-- ChatArea.jsx
+|   |   |-- InputArea
+|   |   |   |-- InputArea.jsx
+|   |   |-- Message
+|   |   |   |-- Message.jsx
+|   |   |-- TypingIndicator
+|   |       |-- TypingIndicator.jsx
 |   |-- Header
 |   |   |-- Header.jsx
-|   |-- Message
-|   |   |-- Message.jsx
-|   |-- TypingIndicator
-|       |-- TypingIndicator.jsx
 |-- reducer
 |   |-- chatHistory.js
 |-- store
@@ -37,7 +40,7 @@ src
 |-- assets
 |   |-- user.png
 |   |-- bot.png
-```
+
 
 ---
 
