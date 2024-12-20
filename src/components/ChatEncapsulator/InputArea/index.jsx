@@ -22,12 +22,19 @@ const InputArea = ({ inputValue, setInputValue, sendMessage }) => {
 
       {/* Text area for message */}
       <textarea
-        className="flex-1 p-3 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-[#723AFF] hide-scrollbar"
+        className="flex-1 p-3 border border-gray-300 rounded-full resize-none focus:outline-none focus:ring-2 focus:ring-[#723AFF] hide-scrollbar"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
         onKeyDown={handleKeyDown}
         placeholder="Type your message..."
-        rows="2"
+        rows="1"
+        style={{
+          height: '40px',  // Fixed height
+          lineHeight: '40px',  // Match line height with height to vertically center the text
+          paddingTop: '0',  // No extra padding at the top
+          paddingBottom: '0',  // No extra padding at the bottom
+          resize: 'none',  // Prevent resizing
+        }}
       ></textarea>
       
       {/* Emoji icon */}
