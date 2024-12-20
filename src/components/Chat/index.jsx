@@ -7,9 +7,9 @@ import { addMessage, setTyping } from '../../reducer/chatSlice';
 
 const Chat = () => {
   const dispatch = useDispatch();
-  const { messages, isTyping } = useSelector((state) => state.chat);
   const [inputValue, setInputValue] = useState('');
   const [isLoaded, setIsLoaded] = useState(false);
+  const [error, setError] = useState(null); // Error state
 
   const botReplies = [
     "Thank you for your message! I'll get back to you shortly.",
@@ -19,14 +19,32 @@ const Chat = () => {
     "I'll process that and get back to you in a moment.",
   ];
 
-  // Load chat history from localStorage on mount
+  const { messages, isTyping } = useSelector((state) => {
+    try {
+      return state.chat || { messages: [], isTyping: false }; // Fallback to avoid TypeError
+    } catch (err) {
+      setError('An error occurred while loading the chat state.');
+      console.error(err);
+      return { messages: [], isTyping: false };
+    }
+  });
+
   useEffect(() => {
-    setIsLoaded(true);
+    try {
+      setIsLoaded(true);
+    } catch (err) {
+      setError('Failed to load the chat.');
+      console.error(err);
+    }
   }, []);
 
-  // Save chat history to localStorage whenever messages change
   useEffect(() => {
-    localStorage.setItem('chatHistory', JSON.stringify(messages));
+    try {
+      localStorage.setItem('chatHistory', JSON.stringify(messages));
+    } catch (err) {
+      setError('Failed to save chat history.');
+      console.error(err);
+    }
   }, [messages]);
 
   const formatTime = () => {
@@ -40,51 +58,62 @@ const Chat = () => {
   };
 
   const sendMessage = () => {
-    if (inputValue.trim() === '') return;
+    try {
+      if (inputValue.trim() === '') return;
 
-    const newMessage = {
-      id: Date.now(),
-      text: inputValue,
-      sender: 'user',
-      timestamp: formatTime(),
-    };
-
-    dispatch(addMessage(newMessage));
-    setInputValue('');
-
-    // Simulate bot response
-    dispatch(setTyping(true));
-    setTimeout(() => {
-      const randomReply = botReplies[Math.floor(Math.random() * botReplies.length)];
-
-      const botMessage = {
+      const newMessage = {
         id: Date.now(),
-        text: randomReply,
-        sender: 'bot',
+        text: inputValue,
+        sender: 'user',
         timestamp: formatTime(),
       };
 
-      dispatch(addMessage(botMessage));
-      dispatch(setTyping(false));
-    }, 2000);
+      dispatch(addMessage(newMessage));
+      setInputValue('');
+
+      dispatch(setTyping(true));
+      setTimeout(() => {
+        const randomReply =
+          botReplies[Math.floor(Math.random() * botReplies.length)] || 'Sorry, no response available.';
+
+        const botMessage = {
+          id: Date.now(),
+          text: randomReply,
+          sender: 'bot',
+          timestamp: formatTime(),
+        };
+
+        dispatch(addMessage(botMessage));
+        dispatch(setTyping(false));
+      }, 2000);
+    } catch (err) {
+      setError('Failed to send the message.');
+      console.error(err);
+    }
   };
 
+  if (error) {
+    return (
+      <div className="flex items-center justify-center h-screen bg-red-50 text-red-700">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold">Something went wrong</h1>
+          <p className="mt-2">{error}</p>
+        </div>
+      </div>
+    );
+  }
+
   if (!isLoaded) {
-    return <div>Loading chat...</div>;
+    return <div className="flex items-center justify-center h-screen">Loading chat...</div>;
   }
 
   return (
     <div className="flex flex-col h-screen bg-gray-50">
-      {/* Fixed header */}
       <div className="fixed top-0 left-0 right-0 z-10">
         <Header />
       </div>
-
       <div className="flex flex-col h-full mt-16 mb-16 overflow-hidden">
-        {/* Chat area with dynamic height */}
         <ChatArea messages={messages} isTyping={isTyping} className="flex-grow overflow-auto" />
-        
-        {/* Fixed input area */}
         <div className="fixed bottom-0 left-0 right-0 z-10">
           <InputArea
             inputValue={inputValue}
