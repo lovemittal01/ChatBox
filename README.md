@@ -31,7 +31,7 @@ src
 |   |-- TypingIndicator
 |       |-- TypingIndicator.jsx
 |-- reducer
-|   |-- chatSlice.js
+|   |-- chatHistory.js
 |-- store
 |   |-- store.js
 |-- assets

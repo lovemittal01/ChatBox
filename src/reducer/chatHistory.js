@@ -5,7 +5,7 @@ const initialState = {
   isTyping: false,
 };
 
-const chatSlice = createSlice({
+const chatHistory = createSlice({
   name: 'chat',
   initialState,
   reducers: {
@@ -21,5 +21,5 @@ const chatSlice = createSlice({
   },
 });
 
-export const { addMessage, setTyping, loadChatHistory } = chatSlice.actions;
-export default chatSlice.reducer;
+export const { addMessage, setTyping, loadChatHistory } = chatHistory.actions;
+export default chatHistory.reducer;

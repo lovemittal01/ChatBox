@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Header from '../Header';
 import ChatArea from '../ChatEncapsulator/ChatArea';
 import InputArea from '../ChatEncapsulator/InputArea';
-import { addMessage, setTyping } from '../../reducer/chatSlice';
+import { addMessage, setTyping } from '../../reducer/chatHistory';
 
 const Chat = () => {
   const dispatch = useDispatch();
@@ -109,12 +109,12 @@ const Chat = () => {
 
   return (
     <div className="flex flex-col h-screen bg-gray-50">
-      <div className="fixed top-0 left-0 right-0 z-10">
+      <div className="fixed top-0 left-0 right-0 z-20">
         <Header />
       </div>
       <div className="flex flex-col h-full mt-16 mb-16 overflow-hidden">
         <ChatArea messages={messages} isTyping={isTyping} className="flex-grow overflow-auto" />
-        <div className="fixed bottom-0 left-0 right-0 z-10">
+        <div className="fixed bottom-0 left-0 right-0 z-20">
           <InputArea
             inputValue={inputValue}
             setInputValue={setInputValue}
