@@ -12,7 +12,7 @@ const InputArea = ({ inputValue, setInputValue, sendMessage }) => {
   return (
     <div className="flex items-center bg-white p-4 rounded-t-lg shadow-md border-t border-gray-300">
       
-      {/* Document icon on the left of the input field */}
+     
       <button
         className="bg-purple-100 p-2 rounded-full hover:bg-purple-200 mr-4"
         onClick={() => alert('Document upload clicked')}
@@ -20,7 +20,6 @@ const InputArea = ({ inputValue, setInputValue, sendMessage }) => {
         <PlusIcon className="w-5 h-5 text-[#723AFF]" />
       </button>
 
-      {/* Text area for message */}
       <textarea
         className="flex-1 p-3 border border-gray-300 rounded-full resize-none focus:outline-none focus:ring-2 focus:ring-[#723AFF] hide-scrollbar"
         value={inputValue}
@@ -29,15 +28,15 @@ const InputArea = ({ inputValue, setInputValue, sendMessage }) => {
         placeholder="Type your message..."
         rows="1"
         style={{
-          height: '40px',  // Fixed height
-          lineHeight: '40px',  // Match line height with height to vertically center the text
-          paddingTop: '0',  // No extra padding at the top
-          paddingBottom: '0',  // No extra padding at the bottom
-          resize: 'none',  // Prevent resizing
+          height: '40px',  
+          lineHeight: '40px',   
+          paddingTop: '0',   
+          paddingBottom: '0',   
+          resize: 'none',  
         }}
       ></textarea>
       
-      {/* Emoji icon */}
+    
       <button
         className="bg-purple-100 p-2 rounded-full hover:bg-purple-200 ml-4"
         onClick={() => alert('Emoji picker clicked')}
@@ -45,7 +44,6 @@ const InputArea = ({ inputValue, setInputValue, sendMessage }) => {
         <EmojiHappyIcon className="w-5 h-5 text-[#723AFF]" />
       </button>
 
-      {/* Send button with only the icon */}
       <button
         onClick={sendMessage}
         className="ml-4 bg-gradient-to-r from-[#723AFF] to-indigo-500 text-white p-2 rounded-full hover:shadow-lg flex items-center"

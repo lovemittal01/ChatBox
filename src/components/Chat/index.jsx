@@ -9,7 +9,7 @@ const Chat = () => {
   const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState('');
   const [isLoaded, setIsLoaded] = useState(false);
-  const [error, setError] = useState(null); // Error state
+  const [error, setError] = useState(null);
 
   const botReplies = [
     "Thank you for your message! I'll get back to you shortly.",
@@ -21,7 +21,7 @@ const Chat = () => {
 
   const { messages, isTyping } = useSelector((state) => {
     try {
-      return state.chat || { messages: [], isTyping: false }; // Fallback to avoid TypeError
+      return state.chat || { messages: [], isTyping: false }; 
     } catch (err) {
       setError('An error occurred while loading the chat state.');
       console.error(err);
