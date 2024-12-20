@@ -75,10 +75,17 @@ const Chat = () => {
 
   return (
     <div className="flex flex-col h-screen bg-gray-50">
-      <Header />
-      <div className="flex flex-col flex-grow overflow-hidden">
-        <ChatArea messages={messages} isTyping={isTyping} />
-        <div className="flex-shrink-0">
+      {/* Fixed header */}
+      <div className="fixed top-0 left-0 right-0 z-10">
+        <Header />
+      </div>
+
+      <div className="flex flex-col h-full mt-16 mb-16 overflow-hidden">
+        {/* Chat area with dynamic height */}
+        <ChatArea messages={messages} isTyping={isTyping} className="flex-grow overflow-auto" />
+        
+        {/* Fixed input area */}
+        <div className="fixed bottom-0 left-0 right-0 z-10">
           <InputArea
             inputValue={inputValue}
             setInputValue={setInputValue}
