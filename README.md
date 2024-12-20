@@ -22,7 +22,7 @@ src
 |-- components
 |   |-- Chat
 |   |   |-- Chat.jsx
-|   |-- ChatWrapper
+|   |-- ChatEncapsulator
 |   |   |-- ChatArea
 |   |   |   |-- ChatArea.jsx
 |   |   |-- InputArea
