@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.hide-scrollbar {
+  overflow: auto;
+  scrollbar-width: none; /* For Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and newer Edge */
+}
+
+/* In your CSS file or a global stylesheet */
+.chat-area::-webkit-scrollbar {
+  display: none; /* Hides the scrollbar */
+}
+
+.chat-area {
+  -ms-overflow-style: none;  /* Hides scrollbar in IE and Edge */
+  scrollbar-width: none;      /* Hides scrollbar in Firefox */
+}
